@@ -24,11 +24,11 @@
     --text-subtle: #6b7280;
     --border-color: rgba(255, 255, 255, 0.07);
     --border-hover: rgba(99, 102, 241, 0.5);
-    --radius-lg: 18px;
-    --radius-md: 10px;
-    --radius-sm: 6px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 *, *::before, *::after {
@@ -45,7 +45,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: var(--bg-main);
     color: var(--text-main);
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
     /* Deep ambient texture */
     background-image:
@@ -138,12 +138,12 @@ nav ul a:hover::after {
 .hero::before {
     content: '';
     position: absolute;
-    top: 10%;
+    top: 0%;
     left: 50%;
     transform: translateX(-50%);
-    width: 600px;
-    height: 400px;
-    background: radial-gradient(ellipse, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
 }
@@ -225,27 +225,28 @@ nav ul a:hover::after {
     gap: 2.5rem;
 }
 
-/* Glassmorphism Event Card */
+/* Premium Glassmorphism Event Card */
 .event-card {
     background: var(--bg-surface);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-color);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: var(--transition-slow);
     display: flex;
     flex-direction: column;
     position: relative;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06), 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .event-card:hover {
     transform: translateY(-8px);
-    border-color: var(--border-hover);
+    border-color: rgba(255, 255, 255, 0.1);
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(99, 102, 241, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 0 0 1px rgba(99, 102, 241, 0.15);
 }
 
 /* Cinematic Image Wrapper with Vignette */
@@ -338,14 +339,14 @@ nav ul a:hover::after {
     max-width: 680px;
     margin: 3rem auto 5rem;
     padding: 3.5rem;
-    background: var(--bg-surface);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border-color);
+    background: rgba(18, 18, 24, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-lg);
     box-shadow:
-        0 32px 80px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        0 40px 100px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 /* Centered section title override for booking */
@@ -455,17 +456,17 @@ nav ul a:hover::after {
 .btn-primary {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #fff;
-    box-shadow: 0 4px 16px var(--primary-glow);
+    box-shadow: 0 8px 24px var(--primary-glow), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:active {
-    transform: scale(0.98) translateY(0);
-    box-shadow: 0 2px 8px var(--primary-glow);
+    transform: scale(0.97);
+    box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 .btn-block {
@@ -1396,3 +1397,754 @@ footer {
     }
 }
 
+/* ==========================================================================
+   17. PHASE 2 — HERO EXPERIENCE UPGRADE
+   ========================================================================== */
+
+/* Eyebrow label above h1 */
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 50px;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 1.6rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeSlideDown 0.7s ease both;
+}
+
+/* Ghost / secondary CTA button */
+.btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: none;
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: var(--text-main);
+    transform: translateY(-3px);
+}
+
+.btn-ghost:active {
+    transform: scale(0.97);
+}
+
+/* Dual CTA container */
+.hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    animation: fadeSlideUp 0.9s 0.2s ease both;
+}
+
+/* Trust indicator bar */
+.hero-trust-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2.25rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-subtle);
+    letter-spacing: 0.02em;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    animation: fadeSlideUp 1s 0.4s ease both;
+}
+
+.trust-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--text-subtle);
+    border-radius: 50%;
+    opacity: 0.4;
+    flex-shrink: 0;
+}
+
+/* Hero headline & paragraph animations */
+.hero h1 {
+    animation: fadeSlideUp 0.75s 0.05s ease both;
+}
+
+.hero p {
+    animation: fadeSlideUp 0.75s 0.15s ease both;
+}
+
+@keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   18. PHASE 2 — EVENT STATUS BADGES (Featured / Trending / Hot / Popular)
+   ========================================================================== */
+
+.event-status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    white-space: nowrap;
+}
+
+.event-status-badge.badge-featured {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.45);
+    color: #fbbf24;
+    box-shadow: 0 0 14px rgba(245, 158, 11, 0.2);
+}
+
+.event-status-badge.badge-trending {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.45);
+    color: #a5b4fc;
+    box-shadow: 0 0 14px rgba(99, 102, 241, 0.2);
+}
+
+.event-status-badge.badge-hot {
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid rgba(244, 63, 94, 0.45);
+    color: #fb7185;
+    box-shadow: 0 0 14px rgba(244, 63, 94, 0.2);
+}
+
+.event-status-badge.badge-popular {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #34d399;
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.18);
+}
+
+/* Per-status card border treatments */
+.event-card[data-status="featured"] {
+    border-color: rgba(245, 158, 11, 0.18);
+}
+
+.event-card[data-status="featured"]:hover {
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 0 0 1px rgba(245, 158, 11, 0.2);
+}
+
+.event-card[data-status="trending"]:hover {
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 0 0 1px rgba(99, 102, 241, 0.3);
+}
+
+.event-card[data-status="hot"]:hover {
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        0 0 0 1px rgba(244, 63, 94, 0.3);
+}
+
+/* ==========================================================================
+   19. PHASE 2 — SCROLL-REVEAL ANIMATIONS
+   ========================================================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.05s; }
+.reveal-delay-2 { transition-delay: 0.12s; }
+.reveal-delay-3 { transition-delay: 0.19s; }
+.reveal-delay-4 { transition-delay: 0.26s; }
+.reveal-delay-5 { transition-delay: 0.33s; }
+.reveal-delay-6 { transition-delay: 0.40s; }
+
+/* ==========================================================================
+   20. PHASE 2 — RESPONSIVE ADDITIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hero-eyebrow {
+        font-size: 0.72rem;
+        padding: 0.35rem 0.9rem;
+    }
+
+    .hero-cta-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .hero-cta-group .btn {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+    }
+
+    .hero-trust-bar {
+        gap: 0.6rem;
+        font-size: 0.72rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-trust-bar {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .hero-trust-bar .trust-dot {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   21. PHASE 3 — LIVE EVENT COUNTDOWN
+   ========================================================================== */
+.event-countdown {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.countdown-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-subtle);
+    flex-shrink: 0;
+}
+
+.countdown-units {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 6px;
+    padding: 0.2rem 0.45rem;
+    min-width: 36px;
+}
+
+.countdown-unit .cu-num {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-unit .cu-lbl {
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+}
+
+.countdown-sep {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-subtle);
+    opacity: 0.5;
+    align-self: flex-start;
+    padding-top: 2px;
+}
+
+/* ==========================================================================
+   22. PHASE 3 — TICKET AVAILABILITY INDICATOR
+   ========================================================================== */
+.availability-wrap {
+    margin-bottom: 0.9rem;
+}
+
+.availability-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.35rem;
+}
+
+.availability-state {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.availability-state.avail-ok     { color: var(--emerald); }
+.availability-state.avail-limited { color: #fbbf24; }
+.availability-state.avail-scarce  { color: var(--accent); }
+
+.availability-pct {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-subtle);
+}
+
+.availability-bar-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.availability-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.availability-bar-fill.avail-ok     { background: linear-gradient(to right, var(--emerald), #34d399); }
+.availability-bar-fill.avail-limited { background: linear-gradient(to right, #d97706, #fbbf24); }
+.availability-bar-fill.avail-scarce  { background: linear-gradient(to right, var(--accent), #fb7185); }
+
+/* ==========================================================================
+   23. PHASE 3 — FAVORITE EVENTS (HEART BUTTON + SAVED BADGE)
+   ========================================================================== */
+.btn-favorite {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: var(--text-subtle);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 0.65rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: inherit;
+    line-height: 1;
+}
+
+.btn-favorite:hover {
+    border-color: rgba(244, 63, 94, 0.4);
+    background: rgba(244, 63, 94, 0.07);
+    color: #fb7185;
+    transform: scale(1.1);
+}
+
+.btn-favorite.saved {
+    border-color: rgba(244, 63, 94, 0.5);
+    background: rgba(244, 63, 94, 0.1);
+    color: var(--accent);
+}
+
+.btn-favorite.saved:hover {
+    background: rgba(244, 63, 94, 0.18);
+}
+
+/* Saved events nav button */
+.btn-saved-events {
+    background: rgba(244, 63, 94, 0.08);
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    border-radius: 50px;
+    color: #fb7185;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-saved-events:hover {
+    background: rgba(244, 63, 94, 0.16);
+    border-color: rgba(244, 63, 94, 0.45);
+    box-shadow: 0 4px 14px rgba(244, 63, 94, 0.18);
+}
+
+.saved-count-badge {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.1rem 0.5rem;
+    min-width: 1.3rem;
+    text-align: center;
+}
+
+/* ==========================================================================
+   24. PHASE 3 — SURPRISE ME BUTTON + SPOTLIGHT RING
+   ========================================================================== */
+.btn-surprise {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 50px;
+    color: #fbbf24;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.btn-surprise:hover {
+    background: rgba(245, 158, 11, 0.16);
+    border-color: rgba(245, 158, 11, 0.5);
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-surprise:active {
+    transform: scale(0.97);
+}
+
+/* Spotlight ring on a surprised card */
+.event-card.surprised {
+    outline: 2.5px solid rgba(245, 158, 11, 0.7);
+    outline-offset: 3px;
+    box-shadow:
+        0 0 0 6px rgba(245, 158, 11, 0.12),
+        0 20px 50px rgba(245, 158, 11, 0.15),
+        0 30px 60px rgba(0, 0, 0, 0.5);
+    animation: surpriseRingPulse 1.8s ease-out forwards;
+}
+
+@keyframes surpriseRingPulse {
+    0%   { outline-color: rgba(245, 158, 11, 0.9); box-shadow: 0 0 0 8px rgba(245, 158, 11, 0.2), 0 20px 50px rgba(245, 158, 11, 0.2); }
+    60%  { outline-color: rgba(245, 158, 11, 0.5); }
+    100% { outline-color: rgba(245, 158, 11, 0); box-shadow: 0 0 0 0 transparent, 0 20px 50px rgba(0,0,0,0.3); }
+}
+
+/* Filter zone layout — ensure Surprise Me sits on the right */
+.filter-zone {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filter-zone > div:last-of-type,
+.filter-zone > .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   25. PHASE 3 — POPULARITY INDICATORS
+   ========================================================================== */
+.popularity-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.55rem;
+}
+
+.pop-trending {
+    background: rgba(99, 102, 241, 0.1);
+    color: #a5b4fc;
+    border-left: 2px solid #6366f1;
+}
+
+.pop-most-booked {
+    background: rgba(16, 185, 129, 0.08);
+    color: #34d399;
+    border-left: 2px solid var(--emerald);
+}
+
+.pop-editors-pick {
+    background: rgba(245, 158, 11, 0.1);
+    color: #fbbf24;
+    border-left: 2px solid #f59e0b;
+}
+
+/* ==========================================================================
+   26. PHASE 3 — RECENTLY VIEWED TRAY
+   ========================================================================== */
+.recently-viewed-tray {
+    margin-top: 3rem;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeSlideUp 0.5s ease both;
+}
+
+.rv-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.rv-icon {
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.rv-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.rv-list {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.rv-item {
+    background: rgba(18, 18, 24, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+    animation: fadeSlideUp 0.4s ease both;
+}
+
+.rv-item:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    background: rgba(99, 102, 241, 0.07);
+    color: var(--text-main);
+}
+
+.rv-item-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.rv-item-name {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+/* ==========================================================================
+   27. PHASE 3 — FLOATING MINI BOOKING WIDGET
+   ========================================================================== */
+.mini-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 150;
+    animation: miniWidgetSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+@keyframes miniWidgetSlideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.mini-widget-inner {
+    background: rgba(14, 14, 22, 0.97);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 18px;
+    padding: 1.25rem 1.4rem;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(99, 102, 241, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    min-width: 230px;
+    position: relative;
+}
+
+.mini-widget-close {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.75rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    color: var(--text-subtle);
+    width: 1.6rem;
+    height: 1.6rem;
+    cursor: pointer;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.mini-widget-close:hover {
+    background: rgba(244, 63, 94, 0.12);
+    border-color: rgba(244, 63, 94, 0.3);
+    color: var(--accent);
+}
+
+.mini-widget-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.mini-widget-event {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 190px;
+}
+
+.mini-widget-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    padding: 0.45rem 0.65rem;
+    background: rgba(99, 102, 241, 0.07);
+    border: 1px solid rgba(99, 102, 241, 0.14);
+    border-radius: var(--radius-sm);
+}
+
+.mini-widget-tickets-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mini-widget-qty {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.mini-widget-cta {
+    display: block;
+    text-align: center;
+    padding: 0.6rem 0;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.mini-widget-cta:hover {
+    box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
+    transform: translateY(-2px);
+}
+
+/* Hide on small mobile to avoid obstructing booking form */
+@media (max-width: 640px) {
+    .mini-widget {
+        display: none !important;
+    }
+}
+
+/* Responsive nav adjustments for Phase 3 buttons */
+@media (max-width: 768px) {
+    .btn-saved-events {
+        order: -2;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .btn-surprise {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .rv-item-name {
+        max-width: 140px;
+    }
+}

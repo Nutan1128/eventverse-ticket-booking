@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="LuminaPass — Browse and book tickets for the best upcoming events: concerts, sports, movies, comedy shows, and festivals.">
+    <meta name="theme-color" content="#060609">
     <title>LuminaPass - Premium Event Ticket Booking</title>
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +13,13 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="loading">
+
+    <!-- Skip Navigation (Accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
 
     <!-- =====================================================================
          OFF-CANVAS TICKET DRAWER OVERLAY
@@ -60,18 +67,35 @@
                 My Tickets
                 <span id="ticket-count-badge" class="ticket-count-badge" style="display:none;">0</span>
             </button>
+            <!-- Saved Events Count Badge -->
+            <button id="saved-events-btn" class="btn-saved-events" aria-label="View saved events">
+                <span>❤️</span>
+                Saved
+                <span id="saved-count-badge" class="saved-count-badge" style="display:none;">0</span>
+            </button>
         </nav>
     </header>
 
     <!-- =====================================================================
          MAIN CONTENT
          ===================================================================== -->
-    <main>
+    <main id="main-content">
         <!-- Introduction Section (Hero) -->
         <section id="home" class="hero">
-            <h1><span>Welcome to LuminaPass</span></h1>
-            <p>Discover the best events happening around you. Browse through our curated list of upcoming events, concerts, and conferences, and seamlessly book your tickets through our platform.</p>
-            <a href="#events" class="btn btn-primary">Browse Events</a>
+            <div class="hero-eyebrow">🌟 India's Premium Ticketing Platform</div>
+            <h1>Your Next <span>Unforgettable</span><br>Experience Awaits</h1>
+            <p>Discover hand-picked concerts, sports events, festivals and more. Seamlessly browse and book your tickets with LuminaPass — where every event is an experience.</p>
+            <div class="hero-cta-group">
+                <a href="#events" class="btn btn-primary">Explore Events</a>
+                <a href="#booking" class="btn btn-ghost">Book a Ticket</a>
+            </div>
+            <div class="hero-trust-bar">
+                <span>🔒 Secure Payments</span>
+                <span class="trust-dot"></span>
+                <span>⚡ Instant Confirmation</span>
+                <span class="trust-dot"></span>
+                <span>🎫 Digital Tickets</span>
+            </div>
         </section>
 
         <!-- ===================================================================
@@ -120,6 +144,10 @@
                     <button class="pill" data-filter="Movie">Cinema</button>
                     <button class="pill" data-filter="Sports">Sports</button>
                 </div>
+                <!-- Surprise Me Button -->
+                <button id="surprise-me-btn" class="btn-surprise" aria-label="Highlight a random event">
+                    <span>🎲</span> Surprise Me
+                </button>
             </div>
 
             <!-- No results message (hidden by default) -->
@@ -127,7 +155,7 @@
 
             <div class="events-grid">
                 <!-- Event Card 1: Movie Event -->
-                <article class="event-card" data-category="Movie" data-title="Inception: IMAX Re-release">
+                <article class="event-card" data-category="Movie" data-title="Inception: IMAX Re-release" data-status="featured">
                     <div class="event-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80" alt="Movie Event">
                         <div class="event-badge">Movie</div>
@@ -149,7 +177,7 @@
                 </article>
 
                 <!-- Event Card 2: Concert Event -->
-                <article class="event-card" data-category="Concert" data-title="Arijit Singh Live Concert">
+                <article class="event-card" data-category="Concert" data-title="Arijit Singh Live Concert" data-status="trending">
                     <div class="event-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80" alt="Concert Event">
                         <div class="event-badge">Concert</div>
@@ -171,7 +199,7 @@
                 </article>
 
                 <!-- Event Card 3: Cricket Match -->
-                <article class="event-card" data-category="Sports" data-title="India vs Australia T20">
+                <article class="event-card" data-category="Sports" data-title="India vs Australia T20" data-status="hot">
                     <div class="event-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80" alt="Cricket Match">
                         <div class="event-badge">Sports</div>
@@ -193,7 +221,7 @@
                 </article>
 
                 <!-- Event Card 4: Football Match -->
-                <article class="event-card" data-category="Sports" data-title="Mumbai City FC vs Mohun Bagan">
+                <article class="event-card" data-category="Sports" data-title="Mumbai City FC vs Mohun Bagan" data-status="popular">
                     <div class="event-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80" alt="Football Match">
                         <div class="event-badge">Sports</div>
@@ -215,7 +243,7 @@
                 </article>
 
                 <!-- Event Card 5: Music Festival -->
-                <article class="event-card" data-category="Festival" data-title="Sunburn Goa 2026">
+                <article class="event-card" data-category="Festival" data-title="Sunburn Goa 2026" data-status="trending">
                     <div class="event-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80" alt="Music Festival">
                         <div class="event-badge">Festival</div>
@@ -257,6 +285,15 @@
                         <button type="button" class="btn btn-primary btn-block btn-book">Book Ticket</button>
                     </div>
                 </article>
+            </div>
+
+            <!-- Recently Viewed Tray -->
+            <div id="recently-viewed-tray" class="recently-viewed-tray" style="display:none;">
+                <div class="rv-header">
+                    <span class="rv-icon">👁️</span>
+                    <span class="rv-title">Recently Viewed</span>
+                </div>
+                <div id="rv-list" class="rv-list"></div>
             </div>
         </section>
 
@@ -341,6 +378,7 @@
          ===================================================================== -->
     <footer id="contact">
         <div class="footer-content">
+            <!-- Contact Info -->
             <div class="contact-info">
                 <h2>Get in Touch</h2>
                 <div class="contact-details">
@@ -349,15 +387,56 @@
                     <p><span class="contact-icon">💬</span> Support: Available 24/7 for booking assistance</p>
                 </div>
             </div>
+            <!-- Navigation Quick Links -->
+            <div class="footer-nav">
+                <h3 class="footer-nav-title">Quick Links</h3>
+                <ul class="footer-nav-list">
+                    <li><a href="#home" class="footer-link">Home</a></li>
+                    <li><a href="#events" class="footer-link">Upcoming Events</a></li>
+                    <li><a href="#booking" class="footer-link">Book Tickets</a></li>
+                    <li><a href="#contact" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+            <!-- Brand -->
             <div class="footer-brand">
                 <div class="logo">LuminaPass</div>
-                <p>Your premium gateway to the best events.</p>
+                <p>Your premium gateway to the best events across India.</p>
+                <!-- Social / Portfolio Links -->
+                <div class="footer-social">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <a href="mailto:support@luminapass.com" class="footer-social-link" aria-label="Email">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        Email Us
+                    </a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 LuminaPass Ticket Booking System. All rights reserved.</p>
+            <p>&copy; 2026 LuminaPass &mdash; Built with ♥ as a portfolio project &nbsp;&middot;&nbsp; <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">View on GitHub</a></p>
         </div>
     </footer>
+
+    <!-- Back To Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <!-- Floating Mini Booking Widget -->
+    <div id="mini-widget" class="mini-widget" style="display:none;" role="complementary" aria-label="Quick booking widget">
+        <div class="mini-widget-inner">
+            <button id="mini-widget-close" class="mini-widget-close" aria-label="Close widget">✕</button>
+            <div class="mini-widget-label">Quick Book</div>
+            <div id="mini-widget-event" class="mini-widget-event">Select an event</div>
+            <div class="mini-widget-row">
+                <span class="mini-widget-tickets-label">Tickets</span>
+                <span id="mini-widget-qty" class="mini-widget-qty">1</span>
+            </div>
+            <a href="#booking" id="mini-widget-cta" class="mini-widget-cta">Go to Booking →</a>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
