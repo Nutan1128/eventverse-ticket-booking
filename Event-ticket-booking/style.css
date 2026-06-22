@@ -1,0 +1,1398 @@
+/* ==========================================================================
+   0. GOOGLE FONTS IMPORT
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ==========================================================================
+   1. DESIGN SYSTEM VARIABLES & RESET
+   ========================================================================== */
+:root {
+    --bg-main: #060609;
+    --bg-surface: rgba(18, 18, 24, 0.65);
+    --bg-surface-solid: #111118;
+    --bg-input: #0d0d14;
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.25);
+    --accent: #f43f5e;
+    --accent-glow: rgba(244, 63, 94, 0.25);
+    --emerald: #10b981;
+    --emerald-dark: #059669;
+    --emerald-glow: rgba(16, 185, 129, 0.2);
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --text-subtle: #6b7280;
+    --border-color: rgba(255, 255, 255, 0.07);
+    --border-hover: rgba(99, 102, 241, 0.5);
+    --radius-lg: 18px;
+    --radius-md: 10px;
+    --radius-sm: 6px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    /* Deep ambient texture */
+    background-image:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 90%, rgba(244, 63, 94, 0.07) 0%, transparent 50%);
+}
+
+/* ==========================================================================
+   2. HEADER & NAVIGATION
+   ========================================================================== */
+header {
+    background: rgba(6, 6, 9, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    background: linear-gradient(135deg, var(--primary) 0%, #818cf8 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    cursor: pointer;
+}
+
+nav ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+nav ul a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.92rem;
+    letter-spacing: 0.01em;
+    transition: var(--transition);
+    position: relative;
+    padding-bottom: 2px;
+}
+
+nav ul a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+nav ul a:hover {
+    color: var(--text-main);
+}
+
+nav ul a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   3. INTRODUCTION (HERO) SECTION
+   ========================================================================== */
+.hero {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 7rem 2rem 6rem;
+    text-align: center;
+    position: relative;
+}
+
+/* Layered ambient glow behind hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 350px;
+    height: 250px;
+    background: radial-gradient(ellipse, rgba(244, 63, 94, 0.09) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero h1, .hero p, .hero a {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3.75rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 span {
+    background: linear-gradient(135deg, var(--primary) 0%, #a5b4fc 45%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto 2.75rem;
+    line-height: 1.75;
+}
+
+/* ==========================================================================
+   4. EVENT LISTING & CARDS
+   ========================================================================== */
+.events-section {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+}
+
+.section-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 2.75rem;
+    position: relative;
+    display: inline-block;
+    color: var(--text-main);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    border-radius: 3px;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Glassmorphism Event Card */
+.event-card {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition-slow);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-hover);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(99, 102, 241, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Cinematic Image Wrapper with Vignette */
+.event-image-wrapper {
+    width: 100%;
+    height: 220px;
+    background-color: #1a1a24;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.event-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: block;
+}
+
+.event-card:hover .event-image-wrapper img {
+    transform: scale(1.06);
+}
+
+/* Dark gradient vignette over image bottom */
+.event-image-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65%;
+    background: linear-gradient(to top, rgba(6, 6, 9, 0.9) 0%, rgba(6, 6, 9, 0.4) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Category Badge — on top of image */
+.event-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    background: rgba(6, 6, 9, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(244, 63, 94, 0.35);
+    padding: 0.28rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.event-content {
+    padding: 1.5rem 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.event-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+    line-height: 1.3;
+}
+
+.event-details-meta {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+}
+
+.event-details-meta > div:first-child {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. BOOKING SECTION (PREMIUM FORM PANEL)
+   ========================================================================== */
+.booking-section {
+    max-width: 680px;
+    margin: 3rem auto 5rem;
+    padding: 3.5rem;
+    background: var(--bg-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Centered section title override for booking */
+.booking-section .section-title {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.booking-section .section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Success Message */
+#form-success-message {
+    display: none;
+    background: rgba(16, 185, 129, 0.08);
+    color: #6ee7b7;
+    padding: 1.1rem 1.5rem;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.5rem;
+    backdrop-filter: blur(8px);
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.form-group label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-subtle);
+}
+
+.form-group input,
+.form-group select {
+    background-color: var(--bg-input);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    color: var(--text-main);
+    font-size: 0.97rem;
+    font-family: inherit;
+    transition: var(--transition);
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239ca3af' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.form-group input::placeholder {
+    color: var(--text-subtle);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+    background-color: rgba(13, 13, 20, 0.9);
+}
+
+/* ==========================================================================
+   6. UI BUTTONS & INTERACTIVE ELEMENTS
+   ========================================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 1.75rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    border: none;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
+}
+
+.btn-primary:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.btn-block {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+}
+
+/* Booked State — Rich Emerald */
+.btn-primary.booked {
+    background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+    box-shadow: 0 4px 16px var(--emerald-glow);
+}
+
+.btn-primary.booked:hover {
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-primary.booked:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   7. VIEW DETAILS TOGGLE & EXTRA DETAILS PANEL
+   ========================================================================== */
+.btn-toggle-details {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    margin-top: 0.65rem;
+    padding: 0.2rem 0;
+    transition: var(--transition);
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.btn-toggle-details::after {
+    content: '›';
+    font-size: 1rem;
+    transition: transform 0.25s ease;
+    display: inline-block;
+}
+
+.btn-toggle-details.open::after {
+    transform: rotate(90deg);
+}
+
+.btn-toggle-details:hover {
+    color: #a5b4fc;
+}
+
+/* Extra Details — Animated panel with violet left border */
+.extra-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                opacity 0.3s ease,
+                margin-top 0.3s ease;
+}
+
+.extra-details.show {
+    max-height: 250px;
+    opacity: 1;
+    margin-top: 0.75rem;
+}
+
+.extra-details > div {
+    background: rgba(6, 6, 14, 0.5);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   8. FORM VALIDATION STATES
+   ========================================================================== */
+.error-message {
+    color: #f87171;
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    display: none;
+    letter-spacing: 0.01em;
+}
+
+.form-group input.error,
+.form-group select.error {
+    border-color: rgba(239, 68, 68, 0.7);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12);
+}
+
+/* Accessibility Focus States */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+/* ==========================================================================
+   9. FOOTER & CONTACT
+   ========================================================================== */
+footer {
+    border-top: 1px solid var(--border-color);
+    padding: 5rem 2rem 3rem;
+    background: linear-gradient(to bottom, transparent, rgba(6, 6, 9, 0.8));
+}
+
+.footer-content {
+    max-width: 1240px;
+    margin: 0 auto 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+    text-align: left;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 280px;
+}
+
+.contact-info h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+    margin-bottom: 1.25rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.contact-details p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-icon {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.footer-brand {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.footer-brand .logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    background: linear-gradient(135deg, var(--primary) 0%, #818cf8 50%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+    color: var(--text-subtle);
+    font-size: 0.9rem;
+    max-width: 250px;
+}
+
+.footer-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.footer-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-subtle);
+    letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   10. RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .events-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .booking-section {
+        padding: 2.75rem 2.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: calc(100% - 3rem);
+    }
+}
+
+/* Tablet/Mobile (max-width: 992px) */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 2.75rem;
+    }
+
+    .hero {
+        padding: 5rem 2rem 4rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1rem 2rem;
+    }
+
+    nav ul {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.15rem;
+        letter-spacing: -0.03em;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding: 4rem 1.5rem 3.5rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .events-section {
+        padding: 2.5rem 1.5rem 3rem;
+    }
+
+    .events-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .booking-section {
+        padding: 2rem 1.5rem;
+        margin: 2rem auto;
+        width: calc(100% - 2rem);
+        border-radius: var(--radius-md);
+    }
+
+    footer {
+        padding: 3.5rem 1.5rem 2.5rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-brand {
+        align-items: center;
+        text-align: center;
+    }
+
+    .contact-details p {
+        justify-content: center;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    nav .logo {
+        font-size: 1.35rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+        font-size: 0.88rem;
+    }
+
+    .hero h1 {
+        font-size: 1.85rem;
+    }
+
+    .event-image-wrapper {
+        height: 190px;
+    }
+
+    .booking-section {
+        margin: 1.5rem auto;
+        width: calc(100% - 1.5rem);
+    }
+}
+
+/* ==========================================================================
+   11. STATS METRIC BAR
+   ========================================================================== */
+.stats-bar {
+    max-width: 1240px;
+    margin: 0 auto 0;
+    padding: 0 2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+.stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 2rem 1.5rem;
+    background: rgba(18, 18, 24, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: var(--transition);
+}
+
+.stat-item:first-child {
+    border-radius: 16px 0 0 16px;
+}
+
+.stat-item:last-child {
+    border-radius: 0 16px 16px 0;
+}
+
+.stat-item:hover {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+.stat-number {
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--primary) 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.07);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   12. SEARCH & DISCOVERY UTILITY HUB
+   ========================================================================== */
+.filter-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.search-input {
+    width: 100%;
+    background: rgba(13, 13, 20, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    padding: 0.85rem 1.25rem 0.85rem 2.75rem;
+    color: var(--text-main);
+    font-size: 0.92rem;
+    font-family: inherit;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+}
+
+.search-input::placeholder {
+    color: var(--text-subtle);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+    background: rgba(13, 13, 20, 0.95);
+}
+
+/* Category Filter Pills */
+.filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.pill {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    padding: 0.45rem 1.1rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.02em;
+}
+
+.pill:hover {
+    border-color: var(--primary);
+    color: var(--text-main);
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.pill.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 3px 12px var(--primary-glow);
+}
+
+/* No results message */
+.no-results-msg {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem 0;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   13. TICKET TIER SELECTION MATRIX
+   ========================================================================== */
+.tier-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.25rem;
+}
+
+/* Hide native radio input */
+.tier-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.tier-card {
+    cursor: pointer;
+    display: block;
+}
+
+.tier-card-content {
+    background: var(--bg-input);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.2rem;
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.tier-card-content:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+/* Active/selected tier card */
+.tier-card input[type="radio"]:checked + .tier-card-content {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.tier-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tier-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* Checkmark — hidden until selected */
+.tier-check {
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.tier-card input[type="radio"]:checked + .tier-card-content .tier-check {
+    opacity: 1;
+}
+
+.tier-description {
+    font-size: 0.78rem;
+    color: var(--text-subtle);
+    line-height: 1.4;
+}
+
+.tier-price {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 0.2rem;
+}
+
+.tier-card:first-of-type .tier-price {
+    color: var(--emerald);
+}
+
+/* ==========================================================================
+   14. MY TICKETS NAV BUTTON
+   ========================================================================== */
+.btn-my-tickets {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 50px;
+    color: var(--primary);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-my-tickets:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.my-tickets-icon {
+    font-size: 0.9rem;
+}
+
+.ticket-count-badge {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.1rem 0.5rem;
+    min-width: 1.3rem;
+    text-align: center;
+}
+
+/* ==========================================================================
+   15. OFF-CANVAS TICKET DRAWER
+   ========================================================================== */
+
+/* Background overlay */
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.drawer-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Drawer Panel */
+.ticket-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    max-width: 95vw;
+    height: 100vh;
+    background: rgba(14, 14, 22, 0.97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid rgba(99, 102, 241, 0.15);
+    z-index: 201;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.ticket-drawer.open {
+    transform: translateX(0);
+}
+
+/* Drawer Header */
+.drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.drawer-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.drawer-icon {
+    font-size: 1.25rem;
+}
+
+.drawer-title h2 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+}
+
+.drawer-close-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: var(--text-muted);
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+}
+
+.drawer-close-btn:hover {
+    background: rgba(244, 63, 94, 0.15);
+    border-color: rgba(244, 63, 94, 0.3);
+    color: var(--accent);
+}
+
+/* Drawer Body */
+.drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 1.75rem;
+}
+
+.drawer-body::-webkit-scrollbar {
+    width: 4px;
+}
+.drawer-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.drawer-body::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 4px;
+}
+
+/* Empty state */
+.drawer-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1rem;
+    gap: 0.75rem;
+}
+
+.drawer-empty-icon {
+    font-size: 3rem;
+    opacity: 0.3;
+}
+
+.drawer-empty p {
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.drawer-empty span {
+    font-size: 0.82rem;
+    color: var(--text-subtle);
+    line-height: 1.5;
+}
+
+/* Ticket Slots in Drawer */
+.drawer-tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Individual Ticket Card in Drawer */
+.drawer-ticket-item {
+    background: rgba(18, 18, 28, 0.8);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 14px;
+    overflow: hidden;
+    animation: ticketSlideIn 0.35s ease forwards;
+}
+
+@keyframes ticketSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.drawer-ticket-info {
+    padding: 1rem 1.25rem 0.75rem;
+}
+
+.drawer-ticket-event {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.3rem;
+}
+
+.drawer-ticket-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.drawer-ticket-tier {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.15rem 0.6rem;
+    border-radius: 50px;
+    margin-top: 0.5rem;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.drawer-ticket-tier.vip {
+    background: rgba(244, 63, 94, 0.12);
+    border-color: rgba(244, 63, 94, 0.3);
+    color: var(--accent);
+}
+
+/* Mock Barcode */
+.mock-barcode {
+    background: rgba(6, 6, 9, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.barcode-lines {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 32px;
+}
+
+.barcode-lines span {
+    display: block;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1px;
+    width: 2px;
+}
+
+.barcode-number {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--text-subtle);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Drawer Footer */
+.drawer-footer {
+    padding: 1rem 1.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-subtle);
+    flex-shrink: 0;
+}
+
+.drawer-footer strong {
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   16. RESPONSIVE ADDITIONS FOR NEW COMPONENTS
+   ========================================================================== */
+@media (max-width: 768px) {
+    .stats-bar {
+        flex-direction: column;
+        gap: 0;
+        padding: 0 1.5rem 1.5rem;
+    }
+
+    .stat-item {
+        width: 100%;
+        padding: 1.25rem 1rem;
+        border-radius: 0 !important;
+    }
+
+    .stat-item:first-child {
+        border-radius: 12px 12px 0 0 !important;
+    }
+
+    .stat-item:last-child {
+        border-radius: 0 0 12px 12px !important;
+    }
+
+    .stat-divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .tier-cards {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .btn-my-tickets {
+        order: -1;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-pills {
+        gap: 0.4rem;
+    }
+
+    .pill {
+        padding: 0.38rem 0.85rem;
+        font-size: 0.78rem;
+    }
+}
+

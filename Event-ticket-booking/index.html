@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LuminaPass — Browse and book tickets for the best upcoming events: concerts, sports, movies, comedy shows, and festivals.">
+    <title>LuminaPass - Premium Event Ticket Booking</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =====================================================================
+         OFF-CANVAS TICKET DRAWER OVERLAY
+         ===================================================================== -->
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+
+    <!-- Ticket Drawer Panel -->
+    <aside id="ticket-drawer" class="ticket-drawer" role="complementary" aria-label="My Tickets">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <span class="drawer-icon">🎟️</span>
+                <h2>My Tickets</h2>
+            </div>
+            <button id="close-drawer" class="drawer-close-btn" aria-label="Close ticket drawer">✕</button>
+        </div>
+        <div class="drawer-body">
+            <div id="drawer-empty-state" class="drawer-empty">
+                <div class="drawer-empty-icon">🎫</div>
+                <p>No tickets booked yet.</p>
+                <span>Fill out the booking form to see your tickets here.</span>
+            </div>
+            <!-- Booked tickets injected here by JS -->
+            <div id="drawer-tickets-list" class="drawer-tickets-list"></div>
+        </div>
+        <div class="drawer-footer">
+            <p>Powered by <strong>LuminaPass</strong></p>
+        </div>
+    </aside>
+
+    <!-- =====================================================================
+         HEADER & NAVIGATION
+         ===================================================================== -->
+    <header>
+        <nav>
+            <div class="logo">LuminaPass</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#booking">Booking</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <!-- My Tickets Drawer Toggle -->
+            <button id="open-drawer-btn" class="btn-my-tickets" aria-label="Open my tickets drawer">
+                <span class="my-tickets-icon">🎟️</span>
+                My Tickets
+                <span id="ticket-count-badge" class="ticket-count-badge" style="display:none;">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- =====================================================================
+         MAIN CONTENT
+         ===================================================================== -->
+    <main>
+        <!-- Introduction Section (Hero) -->
+        <section id="home" class="hero">
+            <h1><span>Welcome to LuminaPass</span></h1>
+            <p>Discover the best events happening around you. Browse through our curated list of upcoming events, concerts, and conferences, and seamlessly book your tickets through our platform.</p>
+            <a href="#events" class="btn btn-primary">Browse Events</a>
+        </section>
+
+        <!-- ===================================================================
+             STATS METRIC BAR
+             =================================================================== -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number">10k+</span>
+                <span class="stat-label">Tickets Distributed</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Verified Events</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number">25+</span>
+                <span class="stat-label">Host Cities</span>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             EVENT LISTING SECTION
+             =================================================================== -->
+        <section id="events" class="events-section">
+            <h2 class="section-title">Upcoming Events</h2>
+
+            <!-- Search & Discovery Utility Hub -->
+            <div class="filter-zone">
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input
+                        type="text"
+                        id="event-search"
+                        class="search-input"
+                        placeholder="Search by event name or artist..."
+                        autocomplete="off"
+                    >
+                </div>
+                <!-- Category Filter Pills -->
+                <div class="filter-pills" role="group" aria-label="Filter events by category">
+                    <button class="pill active" data-filter="all">All</button>
+                    <button class="pill" data-filter="Concert">Concerts</button>
+                    <button class="pill" data-filter="Festival">Nightlife</button>
+                    <button class="pill" data-filter="Movie">Cinema</button>
+                    <button class="pill" data-filter="Sports">Sports</button>
+                </div>
+            </div>
+
+            <!-- No results message (hidden by default) -->
+            <p id="no-results-msg" class="no-results-msg" style="display:none;">No events match your search.</p>
+
+            <div class="events-grid">
+                <!-- Event Card 1: Movie Event -->
+                <article class="event-card" data-category="Movie" data-title="Inception: IMAX Re-release">
+                    <div class="event-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80" alt="Movie Event">
+                        <div class="event-badge">Movie</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Inception: IMAX Re-release</h3>
+                        <div class="event-details-meta">
+                            <div>Date: 15 July 2026</div>
+                            <div class="extra-details">
+                                <div>Time: 8:30 PM</div>
+                                <div>Venue: PVR Director's Cut</div>
+                                <div>Location: New Delhi</div>
+                                <div>Price: ₹650</div>
+                            </div>
+                            <button type="button" class="btn-toggle-details">View Details</button>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block btn-book">Book Ticket</button>
+                    </div>
+                </article>
+
+                <!-- Event Card 2: Concert Event -->
+                <article class="event-card" data-category="Concert" data-title="Arijit Singh Live Concert">
+                    <div class="event-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80" alt="Concert Event">
+                        <div class="event-badge">Concert</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Arijit Singh Live Concert</h3>
+                        <div class="event-details-meta">
+                            <div>Date: 25 June 2026</div>
+                            <div class="extra-details">
+                                <div>Time: 7:00 PM</div>
+                                <div>Venue: Phoenix Arena</div>
+                                <div>Location: Mumbai</div>
+                                <div>Price: ₹1499</div>
+                            </div>
+                            <button type="button" class="btn-toggle-details">View Details</button>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block btn-book">Book Ticket</button>
+                    </div>
+                </article>
+
+                <!-- Event Card 3: Cricket Match -->
+                <article class="event-card" data-category="Sports" data-title="India vs Australia T20">
+                    <div class="event-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=600&q=80" alt="Cricket Match">
+                        <div class="event-badge">Sports</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">India vs Australia T20</h3>
+                        <div class="event-details-meta">
+                            <div>Date: 02 August 2026</div>
+                            <div class="extra-details">
+                                <div>Time: 7:30 PM</div>
+                                <div>Venue: Wankhede Stadium</div>
+                                <div>Location: Mumbai</div>
+                                <div>Price: ₹2500</div>
+                            </div>
+                            <button type="button" class="btn-toggle-details">View Details</button>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block btn-book">Book Ticket</button>
+                    </div>
+                </article>
+
+                <!-- Event Card 4: Football Match -->
+                <article class="event-card" data-category="Sports" data-title="Mumbai City FC vs Mohun Bagan">
+                    <div class="event-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80" alt="Football Match">
+                        <div class="event-badge">Sports</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Mumbai City FC vs Mohun Bagan</h3>
+                        <div class="event-details-meta">
+                            <div>Date: 12 August 2026</div>
+                            <div class="extra-details">
+                                <div>Time: 8:00 PM</div>
+                                <div>Venue: Mumbai Football Arena</div>
+                                <div>Location: Mumbai</div>
+                                <div>Price: ₹850</div>
+                            </div>
+                            <button type="button" class="btn-toggle-details">View Details</button>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block btn-book">Book Ticket</button>
+                    </div>
+                </article>
+
+                <!-- Event Card 5: Music Festival -->
+                <article class="event-card" data-category="Festival" data-title="Sunburn Goa 2026">
+                    <div class="event-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80" alt="Music Festival">
+                        <div class="event-badge">Festival</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Sunburn Goa 2026</h3>
+                        <div class="event-details-meta">
+                            <div>Date: 28 December 2026</div>
+                            <div class="extra-details">
+                                <div>Time: 3:00 PM</div>
+                                <div>Venue: Vagator Beach</div>
+                                <div>Location: Goa</div>
+                                <div>Price: ₹4999</div>
+                            </div>
+                            <button type="button" class="btn-toggle-details">View Details</button>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block btn-book">Book Ticket</button>
+                    </div>
+                </article>
+
+                <!-- Event Card 6: Stand-up Comedy Show -->
+                <article class="event-card" data-category="Comedy" data-title="Zakir Khan Live">
+                    <div class="event-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1585699324551-f6c309eedeca?auto=format&fit=crop&w=600&q=80" alt="Comedy Show">
+                        <div class="event-badge">Comedy</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Zakir Khan Live</h3>
+                        <div class="event-details-meta">
+                            <div>Date: 10 September 2026</div>
+                            <div class="extra-details">
+                                <div>Time: 8:00 PM</div>
+                                <div>Venue: Siri Fort Auditorium</div>
+                                <div>Location: New Delhi</div>
+                                <div>Price: ₹999</div>
+                            </div>
+                            <button type="button" class="btn-toggle-details">View Details</button>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block btn-book">Book Ticket</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             BOOKING SECTION
+             =================================================================== -->
+        <section id="booking" class="booking-section">
+            <h2 class="section-title" style="text-align: center; width: 100%;">Book Your Tickets</h2>
+            <!-- Form with validation IDs and error spans -->
+            <form id="booking-form" class="booking-form" novalidate>
+                <div id="form-success-message">
+                    🎉 Booking Submitted Successfully!
+                </div>
+                <div class="form-group">
+                    <label for="event-select">Select Event</label>
+                    <select id="event-select">
+                        <option value="">-- Choose an Event --</option>
+                        <option value="1">Inception: IMAX Re-release</option>
+                        <option value="2">Arijit Singh Live Concert</option>
+                        <option value="3">India vs Australia T20</option>
+                        <option value="4">Mumbai City FC vs Mohun Bagan</option>
+                        <option value="5">Sunburn Goa 2026</option>
+                        <option value="6">Zakir Khan Live</option>
+                    </select>
+                    <span class="error-message" id="error-event">Please select an event.</span>
+                </div>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe">
+                    <span class="error-message" id="error-name">Name cannot be empty.</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com">
+                    <span class="error-message" id="error-email">Please enter a valid email.</span>
+                </div>
+                <div class="form-group">
+                    <label for="tickets">Number of Tickets</label>
+                    <input type="number" id="tickets" min="1" max="10" placeholder="1">
+                    <span class="error-message" id="error-tickets">Ticket count must be greater than zero.</span>
+                </div>
+
+                <!-- ============================================================
+                     TICKET TIER SELECTION MATRIX
+                     ============================================================ -->
+                <div class="form-group">
+                    <label>Select Ticket Tier</label>
+                    <div class="tier-cards">
+                        <label class="tier-card" for="tier-standard">
+                            <input type="radio" id="tier-standard" name="ticket-tier" value="standard" checked>
+                            <div class="tier-card-content">
+                                <div class="tier-card-top">
+                                    <span class="tier-name">Standard Pass</span>
+                                    <span class="tier-check">✓</span>
+                                </div>
+                                <p class="tier-description">General admission · Base price included</p>
+                                <span class="tier-price">Base Price</span>
+                            </div>
+                        </label>
+                        <label class="tier-card" for="tier-vip">
+                            <input type="radio" id="tier-vip" name="ticket-tier" value="vip">
+                            <div class="tier-card-content">
+                                <div class="tier-card-top">
+                                    <span class="tier-name">VIP Access</span>
+                                    <span class="tier-check">✓</span>
+                                </div>
+                                <p class="tier-description">Front Row + Lounge Access included</p>
+                                <span class="tier-price">+ ₹500</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block">Confirm Booking</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- =====================================================================
+         FOOTER / CONTACT SECTION
+         ===================================================================== -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <div class="contact-details">
+                    <p><span class="contact-icon">✉️</span> Email: <a href="mailto:support@luminapass.com" class="footer-link">support@luminapass.com</a></p>
+                    <p><span class="contact-icon">📞</span> Phone: <a href="tel:+919876543210" class="footer-link">+91 98765 43210</a></p>
+                    <p><span class="contact-icon">💬</span> Support: Available 24/7 for booking assistance</p>
+                </div>
+            </div>
+            <div class="footer-brand">
+                <div class="logo">LuminaPass</div>
+                <p>Your premium gateway to the best events.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LuminaPass Ticket Booking System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
